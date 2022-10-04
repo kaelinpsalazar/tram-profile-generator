@@ -1,36 +1,20 @@
-const Employee = require("../lib/manager");
+const Manager = require("../lib/Manager");
+const Employee = require("../lib/Employee");
 
-describe ('Employee', () => {
-    it ('should have a string value of the employees name', () => {
-            const employeeName = "Kaelin";
+test("Can set office number via constructor argument", () => {
+  const testValue = 100;
+  const e = new Manager("Foo", 1, "test@test.com", testValue);
+  expect(e.officeNumber).toBe(testValue);
+});
 
-            const obj = new Employee (employeeName, '','');
-            expect(obj.getName()).toEqual(employeeName);
-        });
-    });
+test('getRole() should return "Manager"', () => {
+  const testValue = "Manager";
+  const e = new Manager("Foo", 1, "test@test.com", 100);
+  expect(e.getRole()).toBe(testValue);
+});
 
-describe ('Id', () => {
-    it ('should have a string value of the employees name', () => {
-            const employeeID = "01";
-
-            const obj = new Employee (employeeID, '','');
-            expect(obj.getID()).toEqual(employeeID);
-        });
-    });
-
-describe ('Email', () => {
-    it ('should have a string value of the employees name', () => {
-            const employeeEmail = "kaelin@gmail.com";
-            const obj = new Employee (employeeEmail, '','');
-            expect(obj.getEmail()).toEqual(employeeEmail);
-        });
-    });
-
-describe ('Role', () => {
-    it ('should have a string value of the employees name', () => {
-            const employeeRole = "Kaelin";
-
-            const obj = new Employee (employeeName, '','');
-            expect(obj.getRol()).toEqual(employeeName);
-        });
-    });
+test("Can get office number via getOffice()", () => {
+  const testValue = 100;
+  const e = new Manager("Foo", 1, "test@test.com", testValue);
+  expect(e.getOfficeNumber()).toBe(testValue);
+});
