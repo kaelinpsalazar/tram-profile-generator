@@ -1,48 +1,26 @@
-const Employee = require("../lib/Employee");
+const Employee = require("../lib/Employee.js");
 
-test("Create Employee", () => {
-  const emp = new Employee();
-  expect(typeof(e)).toBe("object");
-});
+describe("Getters", () => {
+  const name = "Peter Gibbons";
+  const id = 33;
+  const email = "peter.gibbons@initech.com";
+  const role = "Employee";
 
-test("Use constructor to set name", () => {
-  const name = "Kaelin";
-  const emp = new Employee(name);
-  expect(emp.name).toBe(name);
-});
+  const testEmployee = new Employee(name, id, email);
 
-test("Use constructor to set id", () => {
-  const employeeId = 100;
-  const emp = new Employee("Kaelin", testValue);
-  expect(empid).toBe(employeeId);
-});
+  it("Should return the Employee name when requested", () => {
+    expect(testEmployee.getName()).toBe(name);
+  });
 
-test("Use constructor to se email", () => {
-  const employeeEmail = "test@test.com";
-  const emp = new Employee("Kaelin", 1, employeeEmail);
-  expect(emp.email).toBe(employeeEmail);
-});
+  it("Should return the Employee id when requested", () => {
+    expect(testEmployee.getId()).toBe(id);
+  });
 
-test("get name", () => {
-  const employeeName = "Kaelin";
-  const emp = new Employee(employeeName);
-  expect(emp.getName()).toBe(employeeName);
-});
+  it("Should return the Employee email when requested", () => {
+    expect(testEmployee.getEmail()).toBe(email);
+  });
 
-test("Get Id", () => {
-  const employeeId = 42;
-  const emp = new Employee("Kaelin", employeeId);
-  expect(emp.getId()).toBe(employeeId);
-});
-
-test("Get Email", () => {
-  const employeeEmail = "test@test.com";
-  const emp = new Employee("Kaelin", 1, employeeEmail);
-  expect(emp.getEmail()).toBe(employeeEmail);
-});
-
-test("get role", () => {
-  const employeeRole = "Employee";
-  const empid = new Employee("Kaelin", 1, "test@test.com");
-  expect(emp.getRole()).toBe(employeeRole);
+  it("Should return the Employee role when requested", () => {
+    expect(testEmployee.getRole()).toBe(role);
+  });
 });
