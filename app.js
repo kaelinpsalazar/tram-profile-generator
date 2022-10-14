@@ -1,15 +1,14 @@
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-
-const inquirer = require("inquirer");
-const path = require("path");
-
 const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "index.html");
-
+const inquirer = require("inquirer");
+const path = require("path");
 const render = require("./lib/htmlRenderer");
+
+
 
 let employeeArray=[]
 
@@ -35,7 +34,7 @@ const questContinue = () => {
     }])
     .then(yesOrNo => {
         if (yesOrNo.yesOrNo === 'yes') {
-            engineerOrIntern() 
+            jobofEmployee() 
         } else {
             console.log('you are done')
         }
@@ -43,16 +42,16 @@ const questContinue = () => {
     })
 }
 
-const engineerOrIntern = () => {
+const jobofEmployee = () => {
     inquirer.prompt([{
-        message: 'Are we adding an engineer or an intern',
+        message: 'What kind of employee do we want',
         type: 'list',
         choices: ['Engineer', 'Intern'],
-        name:'engOrInt'
+        name:'empType'
     }])
     .then(answer => {
         console.log(answer)
-        if(answer.engOrInt === 'Engineer') {
+        if(answer.empType === 'Engineer') {
             inquirer.prompt([
                 {
                     message: 'What is the name of the Engineer?',
@@ -83,7 +82,7 @@ const engineerOrIntern = () => {
                 console.log(employeeArray)
                 questContinue()
             })
-        } else if (answer.engOrInt === 'Intern') {
+        } else if (answer.empType === 'Intern') {
             inquirer.prompt([
                 {
                     message: 'What is the name of the Intern?',
@@ -145,6 +144,6 @@ const engineerOrIntern = () => {
         let newManager = new Manager(manager.name, manager.id, manager.email, manager.office)
         employeeArray.push(newManager)
         console.log(employeeArray)
-        engineerOrIntern()
+        jobofEmployee()
     });
     

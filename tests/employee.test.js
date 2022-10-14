@@ -1,26 +1,26 @@
 const Employee = require("../lib/Employee.js");
 
-describe("Getters", () => {
-  const name = "Peter Gibbons";
-  const id = 33;
-  const email = "peter.gibbons@initech.com";
+describe("Values", () => {
+  const name = "Kaelin Salazar";
+  const id = 42;
+  const email = "Kaelin@gmail.com";
   const role = "Employee";
 
   const testEmployee = new Employee(name, id, email);
 
-  it("Should return the Employee name when requested", () => {
+  it("Will return a name", () => {
     expect(testEmployee.getName()).toBe(name);
   });
 
-  it("Should return the Employee id when requested", () => {
+  it("Will return Id", () => {
     expect(testEmployee.getId()).toBe(id);
   });
 
-  it("Should return the Employee email when requested", () => {
+  it("Will Return email", () => {
     expect(testEmployee.getEmail()).toBe(email);
   });
 
-  it("Should return the Employee role when requested", () => {
+  it("Will Reutrn role", () => {
     expect(testEmployee.getRole()).toBe(role);
   });
 });
