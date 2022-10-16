@@ -2,26 +2,18 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const fs = require("fs");
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "index.html");
 const inquirer = require("inquirer");
 const path = require("path");
-const generateTeam = require("./src/template.js")
+const OUTPUT_DIR = path.resolve(__dirname, "output");
+const outputPath = path.join(OUTPUT_DIR, "index.html");
+// const generateTeam = require("./src/template.js");
+// const employee = require("./lib/employee");
 
 
 
 let employeeArray=[]
 
-const finished = () => {
-    let myTeamHtml = render(employeeArray)
-    fse.outputFile('output/team.html', 'myTeamHtml')
-   .then(() => {
-       console.log('The file has been saved!');
-   })
-   .catch(err => {
-       console.error(err)
-   });
-}
+
 
 
 
@@ -37,6 +29,7 @@ const questContinue = () => {
             jobofEmployee() 
         } else {
             console.log('you are done')
+            renderHtml()
         }
 
     })
@@ -71,7 +64,7 @@ const jobofEmployee = () => {
                 {
                     message: 'What is the GitHub of the Engineer?',
                     type: 'input',
-                    name: 'GitHub'
+                    name: 'github'
                 }
 
             ])
@@ -102,7 +95,7 @@ const jobofEmployee = () => {
                 {
                     message: 'What is the School of the Intern?',
                     type: 'input',
-                    name: 'School'
+                    name: 'school'
                 }
             ])
             .then(intern => {
@@ -146,4 +139,58 @@ const jobofEmployee = () => {
         console.log(employeeArray)
         jobofEmployee()
     });
+
+    function renderHtml () {
+        const htmlPage = 
+        `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        <body>
+        ${createEmployeeCard()}
+        
+            
+            
+        </body>
+        </html>`
+
+        fs.writeFileSync(path.join(__dirname, 'test.html'), htmlPage)
+    }
+
+    function createEmployeeCard () {
+        const generatedCards = employeeArray.map((employee)=>{
+
+            const employeeRole = employee.getRole()
+            let diff;
+
+            if (employeeRole === 'Engineer') {
+                diff = `github: ${employee.github}`
+            } else if (employeeRole === 'Manager') {
+                diff = `office: ${employee.office}`
+            } else {
+                diff = `school: ${employee.school}`
+            }
+
+            const employeeCard = `
+            <div>
+                <h1>${employee.name}</h1>
+                <h2>${employeeRole}</h2>
+                <h3>${employee.id}</h3>
+                <h4>${employee.email}</h4>
+                <h5>${diff}</h5>
+            </div>`
+
+            return employeeCard;
+        }).join('')
+
+        return generatedCards;
+
+
+
+
+    }
     
