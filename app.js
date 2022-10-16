@@ -175,14 +175,21 @@ const jobofEmployee = () => {
                 diff = `school: ${employee.school}`
             }
 
-            const employeeCard = `
-            <div>
-                <h1>${employee.name}</h1>
-                <h2>${employeeRole}</h2>
-                <h3>${employee.id}</h3>
-                <h4>${employee.email}</h4>
-                <h5>${diff}</h5>
-            </div>`
+            const employeeCard = 
+            `<div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card mx-auto" style="width: 18rem">
+                        <h5 class="card-header">${employee.name}<br /><br />${employeeRole}</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">${employee.id}</li>
+                            <li class="list-group-item">${employee.email}</li>
+                            <li class="list-group-item">${diff}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>`
 
             return employeeCard;
         }).join('')
@@ -193,4 +200,3 @@ const jobofEmployee = () => {
 
 
     }
-    
