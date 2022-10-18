@@ -6,8 +6,6 @@ const inquirer = require("inquirer");
 const path = require("path");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "index.html");
-// const generateTeam = require("./src/template.js");
-// const employee = require("./lib/employee");
 
 
 
@@ -17,15 +15,15 @@ let employeeArray=[]
 
 
 
-const questContinue = () => {
+const keepGoing = () => {
     inquirer.prompt ([{
         message: 'do you want to add more members?',
         type: 'list',
         choices: ['yes','no'],
-        name: 'yesOrNo'
+        name: 'newDecision'
     }])
-    .then(yesOrNo => {
-        if (yesOrNo.yesOrNo === 'yes') {
+    .then(newDecision => {
+        if (newDecision.newDecision === 'yes') {
             jobofEmployee() 
         } else {
             console.log('you are done')
@@ -73,7 +71,7 @@ const jobofEmployee = () => {
                 let newEngineer = new Engineer(engineer.name, engineer.id, engineer.email, engineer.github)
                 employeeArray.push(newEngineer)
                 console.log(employeeArray)
-                questContinue()
+                keepGoing()
             })
         } else if (answer.empType === 'Intern') {
             inquirer.prompt([
@@ -102,7 +100,7 @@ const jobofEmployee = () => {
                 let newIntern= new Intern(intern.name, intern.id, intern.email, intern.school)
                 employeeArray.push(newIntern)
                 console.log(employeeArray)
-                questContinue()                 
+                keepGoing()                 
             })
         }
     })
@@ -148,11 +146,15 @@ const jobofEmployee = () => {
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+            <link rel="stylesheet" href="./output/style.css">
+            <title>Team!</title>
         </head>
         <body>
+        <header id="header">My Team</header>
+        <section  id="flex">
         ${createEmployeeCard()}
-        
+        </section>
             
             
         </body>
@@ -176,20 +178,20 @@ const jobofEmployee = () => {
             }
 
             const employeeCard = 
-            `<div class="container">
+            `
             <div class="row">
                 <div class="col-6">
                     <div class="card mx-auto" style="width: 18rem">
-                        <h5 class="card-header">${employee.name}<br /><br />${employeeRole}</h5>
+                        <h5 class="card-header"Name: >${employee.name}<br /><br />Role: ${employeeRole}</h5>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">${employee.id}</li>
-                            <li class="list-group-item">${employee.email}</li>
+                            <li class="list-group-item">ID: ${employee.id}</li>
+                            <li class="list-group-item">Email: ${employee.email}</li>
                             <li class="list-group-item">${diff}</li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>`
+        `
 
             return employeeCard;
         }).join('')
