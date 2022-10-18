@@ -13,6 +13,16 @@ let employeeArray=[]
 
 
 
+const checkEmail = (input) => {
+	if (input.match(/.*@[a-zA-Z]*.com/)) {
+		return true;
+	} else {
+		return console.log("\n\x1B[31mYou need to provide a valid email");
+	}
+};
+
+
+
 
 
 const keepGoing = () => {
@@ -45,22 +55,23 @@ const jobofEmployee = () => {
                 {
                     message: 'What is the name of the Intern?',
                     type: 'input',
-                    name: 'name'
+                    name: 'name',
                 },
                 {
                     message: 'What is the id of the Intern?',
                     type: 'input',
-                    name: 'id'
+                    name: 'id',
                 },
                 {
                     message: 'What is the email of the Intern?',
                     type: 'input',
-                    name: 'email'
+                    name: 'email',
+                    validate: checkEmail,
                 },
                 {
                     message: 'What is the School of the Intern?',
                     type: 'input',
-                    name: 'school'
+                    name: 'school',
                 }
 
             ])
@@ -75,22 +86,23 @@ const jobofEmployee = () => {
                 {
                     message: 'What is the name of the Engineer?',
                     type: 'input',
-                    name: 'name'
+                    name: 'name',
                 },
                 {
                     message: 'What is the id of the Engineer?',
                     type: 'input',
-                    name: 'id'
+                    name: 'id',
                 },
                 {
                     message: 'What is the email of the Engineer?',
                     type: 'input',
-                    name: 'email'
+                    name: 'email',
+                    validate: checkEmail,
                 },
                 {
                     message: 'What is the GitHub of the Engineer?',
                     type: 'input',
-                    name: 'github'
+                    name: 'github',
                 }
             ])
             .then(engineer => {
@@ -108,22 +120,23 @@ const jobofEmployee = () => {
         {
             message: 'What is the name of the Manager?',
             type: 'input',
-            name: 'name'
+            name: 'name',
         },
         {
             message: 'What is the id of the Manager?',
             type: 'input',
-            name: 'id'
+            name: 'id',
         },
         {
             message: 'What is the email of the Manager?',
             type: 'input',
-            name: 'email'
+            name: 'email',
+            validate: checkEmail,
         },
         {
             message: 'What is the office of the Manager?',
             type: 'input',
-            name: 'office'
+            name: 'office',
         }
     ])
     .then(manager=> {
