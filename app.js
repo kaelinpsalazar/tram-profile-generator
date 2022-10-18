@@ -18,15 +18,14 @@ let employeeArray=[]
 const keepGoing = () => {
     inquirer.prompt ([{
         message: 'do you want to add more members?',
+        name: 'newDecision',
         type: 'list',
-        choices: ['yes','no'],
-        name: 'newDecision'
+        choices: ['yes','no']
     }])
     .then(newDecision => {
         if (newDecision.newDecision === 'yes') {
             jobofEmployee() 
         } else {
-            console.log('you are done')
             renderHtml()
         }
 
@@ -36,44 +35,12 @@ const keepGoing = () => {
 const jobofEmployee = () => {
     inquirer.prompt([{
         message: 'What kind of employee do we want',
+        name:'empType',
         type: 'list',
-        choices: ['Engineer', 'Intern'],
-        name:'empType'
+        choices: ['Intern', 'Engineer']
     }])
     .then(answer => {
-        console.log(answer)
-        if(answer.empType === 'Engineer') {
-            inquirer.prompt([
-                {
-                    message: 'What is the name of the Engineer?',
-                    type: 'input',
-                    name: 'name'
-                },
-                {
-                    message: 'What is the id of the Engineer?',
-                    type: 'input',
-                    name: 'id'
-                },
-                {
-                    message: 'What is the email of the Engineer?',
-                    type: 'input',
-                    name: 'email'
-                },
-                {
-                    message: 'What is the GitHub of the Engineer?',
-                    type: 'input',
-                    name: 'github'
-                }
-
-            ])
-            .then(engineer => {
-                console.log(engineer)
-                let newEngineer = new Engineer(engineer.name, engineer.id, engineer.email, engineer.github)
-                employeeArray.push(newEngineer)
-                console.log(employeeArray)
-                keepGoing()
-            })
-        } else if (answer.empType === 'Intern') {
+        if(answer.empType === 'Intern') {
             inquirer.prompt([
                 {
                     message: 'What is the name of the Intern?',
@@ -95,11 +62,40 @@ const jobofEmployee = () => {
                     type: 'input',
                     name: 'school'
                 }
+
             ])
             .then(intern => {
-                let newIntern= new Intern(intern.name, intern.id, intern.email, intern.school)
+                
+                let newIntern = new Intern(intern.name, intern.id, intern.email, intern.github)
                 employeeArray.push(newIntern)
-                console.log(employeeArray)
+                keepGoing()
+            })
+        } else if (answer.empType === 'Engineer') {
+            inquirer.prompt([
+                {
+                    message: 'What is the name of the Engineer?',
+                    type: 'input',
+                    name: 'name'
+                },
+                {
+                    message: 'What is the id of the Engineer?',
+                    type: 'input',
+                    name: 'id'
+                },
+                {
+                    message: 'What is the email of the Engineer?',
+                    type: 'input',
+                    name: 'email'
+                },
+                {
+                    message: 'What is the GitHub of the Engineer?',
+                    type: 'input',
+                    name: 'github'
+                }
+            ])
+            .then(engineer => {
+                let newEngineer= new Engineer(engineer.name, engineer.id, engineer.email, engineer.school)
+                employeeArray.push(newEngineer)
                 keepGoing()                 
             })
         }
@@ -131,10 +127,8 @@ const jobofEmployee = () => {
         }
     ])
     .then(manager=> {
-        console.log(manager)
         let newManager = new Manager(manager.name, manager.id, manager.email, manager.office)
         employeeArray.push(newManager)
-        console.log(employeeArray)
         jobofEmployee()
     });
 
@@ -182,7 +176,7 @@ const jobofEmployee = () => {
             <div class="row">
                 <div class="col-6">
                     <div class="card mx-auto" style="width: 18rem">
-                        <h5 class="card-header"Name: >${employee.name}<br /><br />Role: ${employeeRole}</h5>
+                        <h5 class="card-header"> Name: ${employee.name}<br /><br />Role: ${employeeRole}</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">ID: ${employee.id}</li>
                             <li class="list-group-item">Email: ${employee.email}</li>
